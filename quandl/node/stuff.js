@@ -22,8 +22,11 @@ var stuff = {
         res.send('Quandl home');
     },
     price: function (req, res) {
+        var simb = req.params.p1;
+        simb += (req.params.p2) ? "/" + req.params.p2 : "";
+        simb = simb.toUpperCase();
         quandl.dataset(
-            { source: "CBOE/VXEEM", format: 'json'}, 
+            { source: simb, format: 'json'}, 
             function(err, response){
                 if(err)
                     throw err;
