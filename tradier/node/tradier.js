@@ -7,34 +7,32 @@ var api = {
     var apiKeyPath = path.join(__dirname, '../tradier.apikey');
     var key = fs.readFileSync(apiKeyPath, {encoding: 'utf-8'});
     return key.trim();
+  },
+
+  get options() {
+    return {
+        host: "sandbox.tradier.com",
+        path: "/v1/markets/quotes?symbols=",
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Authorization": "Bearer " + api.key
+        }
+    };
   }
 };
 
-
 var tradier = {
-    home: function (req, res) {
-       res.send('tradier home'); 
-    },
-
-    quote: function (req, res) {
-        var options = {
-            host: "sandbox.tradier.com",
-            path: "/v1/markets/quotes?symbols=spy",
-            method: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Authorization": "Bearer " + api.key
-            }
-        };
-
+    quotes: function (smb, fn) {
+        var options = api.options;
+        options.path += smb;
+        var body = "";
         var request = https.request(options, function (response) {
-            var body = "";
             response.on('data', function (data) {
                 body += data;
-                //process.stdout.write(data);
             });
             response.on('end', function () {
-                res.send(body);
+                fn(body);
             });
         });
         request.end();
@@ -42,9 +40,9 @@ var tradier = {
         request.on('error', function(e) {
             console.error(e);
         });
-    },
 
+        return null;
+    }
 };
-
 
 module.exports = tradier;

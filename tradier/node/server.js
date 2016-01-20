@@ -1,9 +1,8 @@
 var express = require('express');
-var tradier = require('./tradier');
-
+var site = require('./site');
 var app = express();
 
-app.get('/', tradier.home);
-app.get('/q', tradier.quote);
+app.get('/', site.home);
+app.get('/q', site.quote);
 
 app.listen(3000);
