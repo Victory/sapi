@@ -38,7 +38,7 @@ var api = {
         request.on('error', function(e) {
             console.error(e);
         });
-    },   
+    }, 
 };
 
 var tradier = {
@@ -46,7 +46,13 @@ var tradier = {
         var path = "/quotes?symbols=" + smb;
         api.getData(path, fn);
         return null;
-    }
+    },
+
+    chains: function (smb, expiration, fn) {
+        // TODO encodeUri i.e. create a serialize function
+        var path = "/options/chains?symbol=" + smb + "&expiration=" + expiration;
+        api.getData(path, fn);
+    },
 };
 
 module.exports = tradier;
