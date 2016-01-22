@@ -3,6 +3,6 @@ var site = require('./site');
 var app = express();
 
 app.get('/', site.home);
-app.get('/q', site.quote);
-app.get('/c', site.chains);
+app.get('/q/:smb', site.quote);
+app.get('/c/:smb', site.chains);
 app.listen(3000);
