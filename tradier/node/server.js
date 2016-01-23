@@ -4,5 +4,5 @@ var app = express();
 
 app.get('/', site.home);
 app.get('/q/:smb', site.quote);
-app.get('/c/:smb', site.chains);
+app.get('/c/:smb/:expiry', site.chains);
 app.listen(3000);
