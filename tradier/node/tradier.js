@@ -12,7 +12,7 @@ var api = {
     get options() {
         return {
             host: "sandbox.tradier.com",
-            path: "/v1/markets",
+            path: "/v1",
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -42,15 +42,16 @@ var api = {
 };
 
 var tradier = {
+    // ===== pricing/market data
     quotes: function (smb, fn) {
-        var path = "/quotes?symbols=" + smb;
+        var path = "/markets/quotes?symbols=" + smb;
         api.getData(path, fn);
         return null;
     },
 
     chains: function (smb, expiration, fn) {
         // TODO encodeUri i.e. create a serialize function
-        var path = "/options/chains?symbol=" + smb + "&expiration=" + expiration;
+        var path = "/markets/options/chains?symbol=" + smb + "&expiration=" + expiration;
         api.getData(path, fn);
     },
 };

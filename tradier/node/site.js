@@ -1,5 +1,12 @@
 const tradier = require('./tradier');
 
+var r = {
+    json: function (body) {
+        this.setHeader('Content-type', 'application/json');
+        this.send(body);
+    },
+};
+
 var site = {
     home: function (req, res) {
        res.send('tradier home'); 
@@ -7,18 +14,13 @@ var site = {
 
     quote: function (req, res) {
         var smb = req.params.smb;
-        tradier.quotes(smb, function (body) {
-            res.setHeader('Content-type', 'application/json');
-            res.send(body);
-        });
+        tradier.quotes(smb, r.json.bind(res)); 
     },
 
     chains: function (req, res) {
         var smb = req.params.smb;
-        tradier.chains(smb, "2016-01-22", function (body) {
-            res.setHeader('Content-type', 'application/json');
-            res.send(body);
-        });
+        var expiry = req.params.expiry;
+        tradier.chains(smb, expiry, r.json.bind(res));
     },
 
 };
