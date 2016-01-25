@@ -54,6 +54,11 @@ var tradier = {
         var path = "/markets/options/chains?symbol=" + smb + "&expiration=" + expiration;
         api.getData(path, fn);
     },
+
+    timesales: function (smb, fn) {
+        var path = "/markets/timesales?symbol=" + smb;
+        api.getData(path, fn);
+    }
 };
 
 module.exports = tradier;

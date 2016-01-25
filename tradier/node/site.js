@@ -22,7 +22,11 @@ var site = {
         var expiry = req.params.expiry;
         tradier.chains(smb, expiry, r.json.bind(res));
     },
-
+    
+    timesales: function (req, res) {
+        var smb = req.params.smb;
+        tradier.timesales(smb, r.json.bind(res));
+    },
 };
 
 module.exports = site;
