@@ -1,0 +1,17 @@
+{
+  "name": "tradier",
+  "version": "0.0.0",
+  "description": "tradier sandbox",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.13.3",
+    "nunjucks": "~2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Victory",
+  "license": "Apache 2.0"
+}
