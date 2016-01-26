@@ -1,6 +1,6 @@
 const tradier = require('./tradier');
 
-var r = {
+var ren = {
     json: function (body) {
         this.setHeader('Content-type', 'application/json');
         this.send(body);
@@ -9,23 +9,23 @@ var r = {
 
 var site = {
     home: function (req, res) {
-       res.send('tradier home'); 
+       res.render('index.html'); 
     },
 
     quote: function (req, res) {
         var smb = req.params.smb;
-        tradier.quotes(smb, r.json.bind(res)); 
+        tradier.quotes(smb, ren.json.bind(res)); 
     },
 
     chains: function (req, res) {
         var smb = req.params.smb;
         var expiry = req.params.expiry;
-        tradier.chains(smb, expiry, r.json.bind(res));
+        tradier.chains(smb, expiry, ren.json.bind(res));
     },
     
     timesales: function (req, res) {
         var smb = req.params.smb;
-        tradier.timesales(smb, r.json.bind(res));
+        tradier.timesales(smb, ren.json.bind(res));
     },
 };
 

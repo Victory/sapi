@@ -1,6 +1,12 @@
 var express = require('express');
 var site = require('./site');
+const nunjucks = require('nunjucks');
 var app = express();
+
+nunjucks.configure('views', {
+    autoescape: true,
+    express: app
+});
 
 app.get('/', site.home);
 app.get('/q/:smb', site.quote);
