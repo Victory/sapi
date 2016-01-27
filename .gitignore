@@ -1,3 +1,4 @@
 *.apikey
 *node_modules
 *.swp
+tradier/node/static/js/external/*
