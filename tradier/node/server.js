@@ -7,10 +7,12 @@ nunjucks.configure('views', {
     autoescape: true,
     express: app
 });
-app.use(express.static(__dirname + 'static'));
+app.use(express.static(__dirname + '/static'));
 
 app.get('/', site.home);
 app.get('/q/:smb', site.quote);
 app.get('/c/:smb/:expiry', site.chains);
-app.get('/ts/:smb', site.timesales);
+app.get('/ts/:smb', site.timeSales);
+app.get('/plot/ts/:smb', site.plotTimeSales);
+
 app.listen(3000);

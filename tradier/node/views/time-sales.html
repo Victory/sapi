@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Timesales | Tradier Sandbox</title>
+        <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <script src="/js/external/flotr2.min.js"></script>
+    </head>
+    <body>
+        <h1>Timesales</h1>
+        <div id="flotr" style="width: 50%; height: 50%"></div>
+        <script>
+            var series = {{ data | safe }};
+            var d1 = [
+                [1, 2, 3, 1, 4],
+                [2, 5, 2, 3, 4],
+                [3, 2, 3, 1, 5],
+            ];
+
+            Flotr.draw(document.getElementById('flotr'), [d1], { 
+            });
+        </script>
+    </body>
+</html>

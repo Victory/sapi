@@ -5,11 +5,21 @@ var ren = {
         this.setHeader('Content-type', 'application/json');
         this.send(body);
     },
+    template: function (res, template, data) {
+        res.render(template, {data: data});
+    },
 };
 
 var site = {
     home: function (req, res) {
        res.render('index.html'); 
+    },
+
+    plotTimeSales: function (req, res) {
+        var smb = req.params.smb;
+        tradier.timesales(smb, function (body) {
+            ren.template(res, 'time-sales.html', body);
+        });
     },
 
     quote: function (req, res) {
@@ -23,7 +33,7 @@ var site = {
         tradier.chains(smb, expiry, ren.json.bind(res));
     },
     
-    timesales: function (req, res) {
+    timeSales: function (req, res) {
         var smb = req.params.smb;
         tradier.timesales(smb, ren.json.bind(res));
     },
