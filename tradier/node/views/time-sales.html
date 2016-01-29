@@ -9,12 +9,13 @@
         <div id="flotr" style="width: 50%; height: 50%"></div>
         <script>
             var series = {{ data | safe }};
-            var d1 = [
-                [1, 2, 3, 1, 4],
-                [2, 5, 2, 3, 4],
-                [3, 2, 3, 1, 5],
-            ];
 
+            var d1 = [];
+            var i1 = 1;
+            series.series.data.forEach(function (p) {
+                d1.push([i1, p.price]);
+                i1 += 1;
+            });
             Flotr.draw(document.getElementById('flotr'), [d1], { 
             });
         </script>
