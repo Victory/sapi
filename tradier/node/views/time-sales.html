@@ -12,9 +12,16 @@
 
             var d1 = [];
             var i1 = 1;
+            var lastPrice = 0; // last price marked
+            var pt = .1; // min price change to make mark 
+            var deltaPrice;
             series.series.data.forEach(function (p) {
-                d1.push([i1, p.price]);
-                i1 += 1;
+                deltaPrice = Math.abs(lastPrice - p.price);
+                if (deltaPrice >= pt) {
+                    lastPrice = p.price;
+                    d1.push([i1, p.price]);
+                    i1 += 1;
+                }
             });
             Flotr.draw(document.getElementById('flotr'), [d1], { 
             });
