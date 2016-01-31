@@ -19,11 +19,20 @@
                 deltaPrice = Math.abs(lastPrice - p.price);
                 if (deltaPrice >= pt) {
                     lastPrice = p.price;
-                    d1.push([i1, p.price]);
+                    d1.push(
+                        [i1, 
+                        p.price, 
+                        p.price + pt, 
+                        p.price - pt, 
+                        p.price + .05]);
                     i1 += 1;
                 }
             });
             Flotr.draw(document.getElementById('flotr'), [d1], { 
+                candles: {
+                    show: true,
+                    candleWidth: 1,
+                },
             });
         </script>
     </body>
