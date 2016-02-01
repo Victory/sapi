@@ -22,6 +22,13 @@ var site = {
         });
     },
 
+    plotHistory: function (req, res) {
+        var smb = req.params.smb;
+        tradier.history(smb, function (body) {
+            ren.template(res, 'history.html', body);
+        });
+    },
+
     quote: function (req, res) {
         var smb = req.params.smb;
         tradier.quotes(smb, ren.json.bind(res)); 

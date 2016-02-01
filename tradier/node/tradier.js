@@ -58,6 +58,11 @@ var tradier = {
     timesales: function (smb, fn) {
         var path = "/markets/timesales?symbol=" + smb;
         api.getData(path, fn);
+    },
+    
+    history: function (smb, fn) {
+        var path = "/markets/history?symbol=" + smb;
+        api.getData(path, fn);
     }
 };
 
