@@ -7,37 +7,13 @@
     <body>
         <h1>Timesales</h1>
         <div id="flotr" style="width: 50%; height: 50%"></div>
+        <table>
+            <tr><th>Mean Step</th></tr>
+            <tr><td id="meanSteps"></td></tr>
+        </table>
         <script>
             var series = {{ data | safe }};
-
-            var d1 = [];
-            var i1 = 1;
-            var lastPrice = 0; // last price marked
-            var pt = .5; // min price change to make mark 
-            var deltaPrice;
-            series.history.day.forEach(function (p) {
-                var close = p.close;
-                var high = p.high;
-                var low = p.low;
-                var open = p.open;
-                deltaPrice = Math.abs(lastPrice - close);
-                if (deltaPrice >= pt) {
-                    lastPrice = close;
-                    d1.push(
-                        [i1, 
-                        close, 
-                        high, 
-                        low, 
-                        open]);
-                    i1 += 1;
-                }
-            });
-            Flotr.draw(document.getElementById('flotr'), [d1], { 
-                candles: {
-                    show: true,
-                    candleWidth: 1,
-                },
-            });
         </script>
+        <script src="/js/plot-history.js"></script>
     </body>
 </html>
