@@ -3,6 +3,8 @@ var fs = require('fs');
 var path = require('path');
 
 var api = {
+    lastUriCalled: null,
+
     get key() {
         var apiKeyPath = path.join(__dirname, '../tradier.apikey');
         var key = fs.readFileSync(apiKeyPath, {encoding: 'utf-8'});
@@ -24,6 +26,7 @@ var api = {
     getData: function (path, fn) {
         var options = api.options;
         options.path += path; 
+        this.lastUriCalled = "https://" + options.host + options.path;
         var body = "";
         var request = https.request(options, function (response) {
             response.on('data', function (data) {
@@ -42,11 +45,14 @@ var api = {
 };
 
 var tradier = {
+    getLastUriCalled: function () { 
+        return api.lastUriCalled; 
+    },
+
     // ===== pricing/market data
     quotes: function (smb, fn) {
         var path = "/markets/quotes?symbols=" + smb;
         api.getData(path, fn);
-        return null;
     },
 
     chains: function (smb, expiration, fn) {
