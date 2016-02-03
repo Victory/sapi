@@ -20,10 +20,13 @@ var httpTransport = {
             console.error(e);
         });
     },
+    /** used to identify the name of this transport */
+    getName: function () {
+        return "httpTransport";
+    },
 };
 
 var api = {
-    lastUriCalled: null,
     transport: null,
     get key() {
         var apiKeyPath = path.join(__dirname, '../tradier.apikey');
@@ -49,38 +52,38 @@ var api = {
     getData: function (path, fn) {
         var options = api.options;
         options.path += path; 
-        this.lastUriCalled = "https://" + options.host + options.path;
         this.transport.request(options, fn);
+        return {
+            'uri': "https://" + options.host + options.path,
+            'transport': this.transport.getName(),
+        };
      }, 
 };
 
 var tradier = {
-    getLastUriCalled: function () { 
-        return api.lastUriCalled; 
-    },
     setTransport: function (transport) {
         api.setTransport(transport);
     },
     // ===== pricing/market data
     quotes: function (smb, fn) {
         var path = "/markets/quotes?symbols=" + smb;
-        api.getData(path, fn);
+        return api.getData(path, fn);
     },
 
     chains: function (smb, expiration, fn) {
         // TODO encodeUri i.e. create a serialize function
         var path = "/markets/options/chains?symbol=" + smb + "&expiration=" + expiration;
-        api.getData(path, fn);
+        return api.getData(path, fn);
     },
 
     timesales: function (smb, fn) {
         var path = "/markets/timesales?symbol=" + smb;
-        api.getData(path, fn);
+        return api.getData(path, fn);
     },
     
     history: function (smb, fn) {
         var path = "/markets/history?symbol=" + smb;
-        api.getData(path, fn);
+        return api.getData(path, fn);
     }
 };
 
