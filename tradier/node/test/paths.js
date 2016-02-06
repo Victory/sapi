@@ -16,6 +16,7 @@ describe('tradier', function () {
     var quotesUriForF = "https://sandbox.tradier.com/v1/markets/quotes?symbols=f";
     var chainsUri = "https://sandbox.tradier.com/v1/markets/options/chains?symbol=spy&expiration=2019-01-01";
     var timeSalesUri = "https://sandbox.tradier.com/v1/markets/timesales?symbol=spy";
+    var historyUri = "https://sandbox.tradier.com/v1/markets/history?symbol=spy";
 
     describe('#quotes()', function () {
         it('should call ' + quotesUriForSpy + ' when passed "spy"', function (done) {
@@ -54,4 +55,14 @@ describe('tradier', function () {
             done();
         });
     });
+
+    describe('#history()', function () {
+        it('should call  ' + historyUri + ' when passed "spy"', function (done) {
+            tradier.setTransport(mockTransport);
+            var history = tradier.history('spy', function () {});
+            assert.equal(history.uri, historyUri);
+            done();
+        });
+    });
+
 });
