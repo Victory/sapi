@@ -34,6 +34,11 @@ var site = {
         tradier.quotes(smb, ren.json.bind(res)); 
     },
 
+    history: function (req, res) {
+        var smb = req.params.smb;
+        tradier.history(smb, ren.json.bind(res)); 
+    },
+
     chains: function (req, res) {
         var smb = req.params.smb;
         var expiry = req.params.expiry;

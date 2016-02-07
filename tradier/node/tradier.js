@@ -4,7 +4,6 @@ var path = require('path');
 
 var httpTransport = {
     request: function (options, success) {
-        console.log('real request');
         var body = "";
         var request = https.request(options, function (response) {
             response.on('data', function (data) {
