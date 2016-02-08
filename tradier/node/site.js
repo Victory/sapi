@@ -6,7 +6,7 @@ var ren = {
         this.send(body);
     },
     template: function (res, template, data) {
-        res.render(template, {data: data});
+        res.render(template, {data: JSON.parse(data)});
     },
 };
 
@@ -29,6 +29,14 @@ var site = {
         });
     },
 
+    displayChains: function (req, res) {
+        var smb = req.params.smb;
+        var expiry = req.params.expiry;
+        tradier.chains(smb, expiry, function (body) {
+            ren.template(res, 'chains.html', body);
+        });
+    },
+ 
     quote: function (req, res) {
         var smb = req.params.smb;
         tradier.quotes(smb, ren.json.bind(res)); 

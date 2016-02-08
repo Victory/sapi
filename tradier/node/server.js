@@ -16,5 +16,6 @@ app.get('/h/:smb', site.history);
 app.get('/ts/:smb', site.timeSales);
 app.get('/plot/ts/:smb', site.plotTimeSales);
 app.get('/plot/h/:smb', site.plotHistory);
+app.get('/chains/:smb/:expiry', site.displayChains);
 app.disable('etag');
 app.listen(3000);

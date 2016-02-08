@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Chains | Tradier Sandbox</title>
+        <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <script src="/js/external/flotr2.min.js"></script>
+    </head>
+    <body>
+        <h1>Chains</h1>
+        <div id="flotr" style="width: 50%; height: 50%"></div>
+        <script>
+        </script>
+        <table>
+            {% for option in data.options.option %}
+            <tr>
+                <td>{{ option.option_type }}</td>
+                <td>{{ option.ask | round(2) }}</td>
+                <td>{{ option.bid | round(2) }}</td>
+                <td>{{ option.strike }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <!--
+        <script src="/js/chains.js"></script>
+        --!>
+    </body>
+</html>
