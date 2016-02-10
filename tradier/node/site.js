@@ -1,4 +1,5 @@
 const tradier = require('./tradier');
+const options = require('./options');
 
 var ren = {
     json: function (body) {
@@ -6,7 +7,7 @@ var ren = {
         this.send(body);
     },
     template: function (res, template, data) {
-        res.render(template, {data: JSON.parse(data)});
+        res.render(template, {data: data});
     },
 };
 
@@ -33,7 +34,9 @@ var site = {
         var smb = req.params.smb;
         var expiry = req.params.expiry;
         tradier.chains(smb, expiry, function (body) {
-            ren.template(res, 'chains.html', body);
+            ren.template(res, 'chains.html', 
+                {strikeTable: options.getStrikeTable(body)}
+            );
         });
     },
  
