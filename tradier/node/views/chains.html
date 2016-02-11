@@ -13,8 +13,11 @@
                 <tr>
                     <th colspan="2">Put</th>
                     <th></th>
+                    <th colspan="2">Call</th>
                 <tr>
-                    <th>bid</th><th>ask</th><th>strike</th>
+                    <th>bid</th><th>ask</th>
+                    <th>strike</th>
+                    <th>bid</th><th>ask</th>
                 </tr>
                 </thead>
                 {% for option in data.strikeTable %}
@@ -22,6 +25,8 @@
                     <td>{{ option.putBid | round(2) }}</td>
                     <td>{{ option.putAsk | round(2) }}</td>
                     <td>{{ option.strike }}</td>
+                    <td>{{ option.callBid | round(2) }}</td>
+                    <td>{{ option.callAsk | round(2) }}</td>
                 </tr>
                 {% endfor %}
             </table>

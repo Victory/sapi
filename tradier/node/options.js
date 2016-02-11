@@ -18,17 +18,30 @@ var options = {
         }
 
         var table = [];
+        var grid = {};
         data.options.option.forEach(function (option) {
-            console.log(option);
-            var s = getStrikePriceProto();
+            var s;
+            if (typeof(grid[option.strike]) == "undefined") {
+                s = getStrikePriceProto();
+            } else {
+                s = grid[option.strike];
+            }
+
             if (option.option_type === "put") {
                 s.putAsk = option.ask;
                 s.putBid = option.bid;
                 s.strike = option.strike;
-                table.push(s);
+            } else {
+                s.callAsk = option.ask;
+                s.callBid = option.bid;
+                s.strike = option.strike;
             }
-    
+            grid[s.strike] = s;
         });
+        var strike;
+        for (strike in grid) {
+            table.push(grid[strike]);
+        }
         table.sort(function (lhs, rhs) {
             return lhs.strike - rhs.strike;
         });
