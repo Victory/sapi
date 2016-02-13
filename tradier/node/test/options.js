@@ -19,3 +19,18 @@ describe('transport', function () {
 
 });
 
+describe('options', function () {
+    it ('should order by strike price', function (done) {
+        transport.request({}, function (data) {
+            var parsed = JSON.parse(data);
+            var last = Number.MAX_VALUE;
+            parsed.options.option.forEach(function (option) {
+                assert(typeof(option.strike) === "number");
+                console.log(option.strike, last);
+                assert(option.strike <= last);
+                last = option.strike;
+            });
+            done();
+        });
+    });
+});
