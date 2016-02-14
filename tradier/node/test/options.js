@@ -20,13 +20,22 @@ describe('transport', function () {
 });
 
 describe('options', function () {
+    it ('should ccontain option list', function (done) {
+        transport.request({}, function (data) {
+            var parsed = JSON.parse(data);
+            var last = Number.MAX_VALUE;
+            assert(134 == parsed.options.option.length);
+            done();
+        });
+
+    });
+
     it ('should order by strike price', function (done) {
         transport.request({}, function (data) {
             var parsed = JSON.parse(data);
             var last = Number.MAX_VALUE;
             parsed.options.option.forEach(function (option) {
                 assert(typeof(option.strike) === "number");
-                console.log(option.strike, last);
                 assert(option.strike <= last);
                 last = option.strike;
             });
