@@ -27,14 +27,13 @@ var options = {
                 s = grid[option.strike];
             }
 
+            s.strike = option.strike;
             if (option.option_type === "put") {
                 s.putAsk = option.ask;
                 s.putBid = option.bid;
-                s.strike = option.strike;
             } else {
                 s.callAsk = option.ask;
                 s.callBid = option.bid;
-                s.strike = option.strike;
             }
             grid[s.strike] = s;
         });
