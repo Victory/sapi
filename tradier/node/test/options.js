@@ -20,11 +20,10 @@ describe('transport', function () {
 });
 
 describe('options', function () {
-    it ('should ccontain option list', function (done) {
+    it ('should contain options table of length 67', function (done) {
         transport.request({}, function (data) {
-            var parsed = JSON.parse(data);
-            var last = Number.MAX_VALUE;
-            assert(134 == parsed.options.option.length);
+            var table = options.getStrikeTable(JSON.parse(data));
+            assert(67 == table.length);
             done();
         });
 
@@ -32,11 +31,11 @@ describe('options', function () {
 
     it ('should order by strike price', function (done) {
         transport.request({}, function (data) {
-            var parsed = JSON.parse(data);
-            var last = Number.MAX_VALUE;
-            parsed.options.option.forEach(function (option) {
+            var table = options.getStrikeTable(JSON.parse(data));
+            var last = Number.MIN_VALUE;
+            table.forEach(function (option) {
                 assert(typeof(option.strike) === "number");
-                assert(option.strike <= last);
+                assert(option.strike >= last);
                 last = option.strike;
             });
             done();
