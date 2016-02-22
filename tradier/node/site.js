@@ -34,9 +34,13 @@ var site = {
         var smb = req.params.smb;
         var expiry = req.params.expiry;
         tradier.chains(smb, expiry, function (body) {
-            ren.template(res, 'chains.html', 
-                {strikeTable: options.getStrikeTable(body)}
-            );
+            try {
+                ren.template(res, 'chains.html', 
+                    {strikeTable: options.getStrikeTable(body)}
+                );
+            } catch (e) {
+               res.send('no options for expiry'); 
+            }
         });
     },
  

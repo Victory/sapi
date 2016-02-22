@@ -16,6 +16,9 @@ var options = {
         } else {
             data = options;
         }
+        if (data.options == null) {
+            throw "no options found";
+        }
 
         var table = [];
         var grid = {};
