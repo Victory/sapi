@@ -9,6 +9,9 @@ var ren = {
     template: function (res, template, data) {
         res.render(template, {data: data});
     },
+    error: function (res, errorString) {
+        res.render('error.html', {data: errorString});
+    },
 };
 
 var site = {
@@ -39,7 +42,7 @@ var site = {
                     {strikeTable: options.getStrikeTable(body)}
                 );
             } catch (e) {
-               res.send('no options for expiry'); 
+               ren.error(res, 'no options for expiry'); 
             }
         });
     },
