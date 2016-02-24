@@ -6,31 +6,42 @@
         <script src="/js/external/flotr2.min.js"></script>
     </head>
     <body>
-        <div class="container">
-            <h1>Chains</h1>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th colspan="2">Put</th>
-                    <th></th>
-                    <th colspan="2">Call</th>
-                <tr>
-                    <th>bid</th><th>ask</th>
-                    <th>strike</th>
-                    <th>bid</th><th>ask</th>
-                </tr>
-                </thead>
-                {% for option in data.strikeTable %}
-                <tr>
-                    <td>{{ option.putBid | round(2) }}</td>
-                    <td>{{ option.putAsk | round(2) }}</td>
-                    <td>{{ option.strike }}</td>
-                    <td>{{ option.callBid | round(2) }}</td>
-                    <td>{{ option.callAsk | round(2) }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>Chains</h1>
+                </div>
+            </div>
+            <div class="row main-row">
+                <div class="col-lg-8">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th colspan="2">Put</th>
+                            <th></th>
+                            <th colspan="2">Call</th>
+                        <tr>
+                            <th>bid</th><th>ask</th>
+                            <th>strike</th>
+                            <th>bid</th><th>ask</th>
+                        </tr>
+                        </thead>
+                        {% for option in data.strikeTable %}
+                        <tr>
+                            <td>{{ option.putBid | round(2) }}</td>
+                            <td>{{ option.putAsk | round(2) }}</td>
+                            <td>{{ option.strike }}</td>
+                            <td>{{ option.callBid | round(2) }}</td>
+                            <td>{{ option.callAsk | round(2) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div><!-- /table colum -->
+                <div class="col-lg-4">
+                    <div id="options-prices">Not generated</div>
+                </div><!-- graph column -->
+            </div><!-- /main-row -->
+        </div><!-- /.container-fluid -->
 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
     </body>
